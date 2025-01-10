@@ -1,0 +1,24 @@
+{
+  "users": [
+    {
+      "id": "1",
+      "name": "홍길동",
+      "email": "hong@example.com"
+    },
+    {
+      "id": "2",
+      "name": "김철수",
+      "email": "kim@example.com"
+    },
+    {
+      "id": "3",
+      "name": "김주야",
+      "email": "zoo@example.com"
+    },
+    {
+      "id": 4,
+      "name": "김태진",
+      "email": "tae@example.com"
+    }
+  ]
+}
