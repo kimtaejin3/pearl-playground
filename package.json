@@ -5,6 +5,7 @@
   "scripts": {
     "dev": "pnpm --filter react-app dev",
     "build": "pnpm --filter react-app build",
-    "preview": "pnpm --filter react-app preview"
+    "preview": "pnpm --filter react-app preview",
+    "server": "json-server --watch db.json --delay 1000"
   }
 }
