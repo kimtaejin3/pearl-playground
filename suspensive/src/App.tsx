@@ -27,11 +27,14 @@ function App() {
                   <div className="skeleton skeleton-etc"></div>
                 </div>
               ))}
+
+              <button disabled={true}>next</button>
             </div>
           }
         >
           <Users />
         </Suspense>
+
         <div>made by @Taejin Kim</div>
       </ErrorBoundary>
     </div>
