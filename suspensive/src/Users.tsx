@@ -1,16 +1,21 @@
 import { useSuspenseQuery } from "@tanstack/react-query";
 import { User } from "./App";
-
-const fetchUsers = async () => {
-  const res = await fetch("http://localhost:8080/users");
+import { useState } from "react";
+const fetchUsers = async ({ page, limit }: { page: number; limit: number }) => {
+  const res = await fetch(
+    `http://localhost:8080/users?_page=${page}&_per_page=${limit}`
+  );
   await new Promise((resolve) => setTimeout(resolve, 2000));
-  return res.json();
+  const data = await res.json();
+  return data.data;
 };
 
 export default function Users() {
+  const [page, setPage] = useState(1);
+
   const { data } = useSuspenseQuery<User[]>({
-    queryKey: ["users"],
-    queryFn: () => fetchUsers(),
+    queryKey: ["users", page],
+    queryFn: () => fetchUsers({ page, limit: 5 }),
   });
 
   return (
@@ -23,7 +28,7 @@ export default function Users() {
           <p>{user.lastname}</p>
         </div>
       ))}
-      <div>footer</div>
+      <button onClick={() => setPage(page + 1)}>next</button>
     </div>
   );
 }
