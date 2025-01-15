@@ -2,7 +2,13 @@ import { useSuspenseQuery } from "@tanstack/react-query";
 import { User } from "./App";
 import { useState } from "react";
 
-const fetchUsers = async ({ page, limit }: { page: number; limit: number }) => {
+export const fetchUsers = async ({
+  page,
+  limit,
+}: {
+  page: number;
+  limit: number;
+}) => {
   await new Promise((resolve) => setTimeout(resolve, 2000));
   const res = await fetch(
     `http://localhost:8080/users?_page=${page}&_per_page=${limit}`

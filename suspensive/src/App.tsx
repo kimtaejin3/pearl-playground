@@ -1,7 +1,8 @@
 import "./App.css";
-import Users from "./Users";
-import { Suspense } from "react";
+import { fetchUsers } from "./Users";
+import { Suspense, useState } from "react";
 import { ErrorBoundary } from "@suspensive/react";
+import { SuspenseQuery } from "@suspensive/react-query";
 
 export interface User {
   id: string;
@@ -12,6 +13,8 @@ export interface User {
 }
 
 function App() {
+  const [page, setPage] = useState(1);
+
   return (
     <div className="container">
       <ErrorBoundary fallback={<div>Error</div>}>
@@ -32,7 +35,26 @@ function App() {
             </div>
           }
         >
-          <Users />
+          <SuspenseQuery
+            queryKey={["users", page]}
+            queryFn={() => fetchUsers({ page, limit: 5 })}
+          >
+            {({ data }) => {
+              return (
+                <div className="container">
+                  {data?.map((user: User) => (
+                    <div key={user.id} className="user">
+                      <h2>{user.name}</h2>
+                      <p>{user.device}</p>
+                      <p>{user.age}</p>
+                      <p>{user.lastname}</p>
+                    </div>
+                  ))}
+                  <button onClick={() => setPage(page + 1)}>next</button>
+                </div>
+              );
+            }}
+          </SuspenseQuery>
         </Suspense>
 
         <div>made by @Taejin Kim</div>
