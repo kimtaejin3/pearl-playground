@@ -12,6 +12,16 @@
   gap: 5px;
 }
 
+.footer {
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
+}
+
+.footer button {
+  width: 50%;
+}
+
 /* 스켈레톤 UI 스타일 */
 .skeleton {
   background: #f0f0f0;
